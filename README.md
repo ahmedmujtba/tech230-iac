@@ -8,11 +8,19 @@
 
 - Cost:
 
-Helps a business save costs because building and maintaiing own data centers is not required
+Helps a business save costs because building and maintaining own data centers is not required
 
-- Scalability & Availability
+- Boosts Productivity:
+  * Improves prodcutivity of operations teams
+  * Allows you to automate infrastructure hecne saves time, money and minimizes the risk of human error
+  * More focus can be on mission critical tasks
+
+- Scalability & Availability:
+  *
 - Performance visibility
-- Configuration Inconsistencies
+- Consistent Configuration:
+  * Standardised conifrguartion and setup for infrastercuture deployment during cloud migration
+  * Reduces human  error and expediates the migration process
 
 ## Why learn IaC & Ansible
 
@@ -40,60 +48,4 @@ Ansible can also be used with a hybrid approach where ansible controller is host
 
 ## Using Ansible (setup instructions)
 
-1. Make sure Vagarntfile exists in the root folder of your repo.
-2. Run `vagrant up`
-3. Run `vagrant status` (should see 3 vm's running)
-
-vagrant ssh controller
-ssh vagrant@192.168.33.10
-password: vagrant
-
-vagrant@web:~$
-sudo apt update -y
-exit
-
-ssh vagrant@192.168.33.11
-password: vagrant
-
-vagrant@db:~$
-sudo apt update -y
-exit
-
-ansible --version
-output: command not found
-
-ansible folder structure: default
-cd /etc/ansible/hosts and ansible.conf
-
-hosts is to store the addresses of any hosts/agents
-
-To install ansible:
-
-```
-sudo apt install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update -y
-sudo apt-get install ansible -y
-```
-
-ansible --version
-cd etc
-cd ansible
-ls
-
-sudo ansible all -m ping
-sudo nano hosts
-
-add:
-[web]
-192.168.33.10 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-
-sudo ansible web -m
-
-run update and upgrade
-exit
-
-vagrant ssh web - repeat update & upgrade
-exit
-
-vagrant ssh db - repeat update & upgrade
+Follow the steps in the guide [here](./ansible-setup.md) to setup Ansible and learn how to use it
