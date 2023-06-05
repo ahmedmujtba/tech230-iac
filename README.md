@@ -4,7 +4,7 @@
 
 ![alt text](./assets/2.jpg)
 
-## How IaC beenfits businesses
+## How IaC benefits businesses
 
 - Cost:
 
@@ -14,15 +14,17 @@ Helps a business save costs because building and maintaiing own data centers is 
 - Performance visibility
 - Configuration Inconsistencies
 
-Notes from lecture:
+## Why learn IaC & Ansible
 
-Benefits of Ansible:
+## End goal of implementing IaC
+
+## Benefits of Ansible:
 
 - It's simple, human readable automation. no coding skills needed.
 - Ansible is agentless where ansible being the controller acts as master node. no agent node which means it doesn't require any software to be installed on it.
 - Uses SSH protocol for connectivity with servers. i.e. SSH keys
 
-How Ansible works (locally):
+## How Ansible works
 
 - We can use vagrant to create 3 VM's
 - Create ansible controller, deploy node js, mongodb
@@ -30,18 +32,18 @@ How Ansible works (locally):
 - Ansible has python dependency (built with python)
 - It uses YAML
 
-Hybrid approach:
+## Ansible workflow diagram
 
-Controller is local but other VM's are on cloud (aws)
+Ansible can also be used with a hybrid approach where ansible controller is hosted locally but our app and db vm's are hosted in the cloud. Diagram to explain how workflow in ansible looks like:
 
-Why learn it?
+![alt text](./assets/ansible-diagram.png)
 
-End goal of implementing IaC:
 
-How to (steps):
-vagarntfile in root folder or repo
-vagrant up
-vagrant status (should see 3 vm's running)
+## Using Ansible (setup instructions)
+
+1. Make sure Vagarntfile exists in the root folder of your repo.
+2. Run `vagrant up`
+3. Run `vagrant status` (should see 3 vm's running)
 
 vagrant ssh controller - run update and upgrade
 exit
@@ -50,3 +52,4 @@ vagrant ssh web - repeat update & upgrade
 exit
 
 vagrant ssh db - repeat update & upgrade
+
