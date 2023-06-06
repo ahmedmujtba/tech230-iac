@@ -8,19 +8,18 @@
 
 - Cost:
 
-Helps a business save costs because building and maintaining own data centers is not required
+  - Helps a business save costs because building and maintaining own data centers is not required
 
 - Boosts Productivity:
-  * Improves prodcutivity of operations teams
-  * Allows you to automate infrastructure hecne saves time, money and minimizes the risk of human error
-  * More focus can be on mission critical tasks
 
-- Scalability & Availability:
-  *
-- Performance visibility
+  - Improves prodcutivity of operations teams
+  - Allows you to automate infrastructure hecne saves time, money and minimizes the risk of human error
+  - More focus can be on mission critical tasks
+
+- ## Scalability & Availability:
 - Consistent Configuration:
-  * Standardised conifrguartion and setup for infrastercuture deployment during cloud migration
-  * Reduces human  error and expediates the migration process
+  - Standardised conifrguartion and setup for infrastercuture deployment during cloud migration
+  - Reduces human error and expediates the migration process
 
 ## Why learn IaC & Ansible
 
