@@ -20,7 +20,6 @@
     controller.vm.network :private_network, ip: "192.168.33.12"
     
     #config.hostsupdater.aliases = ["development.controller"] 
-
     
    end 
  # creating first VM called web  
