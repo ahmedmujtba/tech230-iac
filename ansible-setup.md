@@ -138,3 +138,10 @@ sudo nano config_app.yml
 - the app should work on port 3000 (can reverse proxy be setup for this)
 
 
+![alt text](./assets/nodejs-playbook.png)
+
+
+![alt text](./assets/app-playbook.png)
+
+![alt text](./assets/app-working.png)
+
