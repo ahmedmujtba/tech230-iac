@@ -124,6 +124,14 @@ your final output for db should be:
 
 tasks to create a playbook to install nodejs:
 
+share app folder to vagrant in controller
+
+from controller to web only use playbook
+
+`ansible web -m copy -a "src=/etc/ansible/app dest=/home/vagrant"`
+
+sudo nano config_app.yml
+
 - using a playbook setup nodejs required version
 - copy required data into web server
 - npm start
