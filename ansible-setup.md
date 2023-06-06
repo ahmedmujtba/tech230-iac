@@ -48,3 +48,26 @@ sudo ansible db -m ping
 Output:
 
 ![alt text](./assets/pongs.png)
+
+
+if we dont know operating system we would run yum command to update
+
+run uname -a gives you info about controller
+
+we need to use adhoc command to find out os of agent node:
+
+sudo ansible web -a "uname -a". command checks fro access first but since we have that setup already it will move on to the argument in our command
+
+output:
+
+![alt text](./assets/web-adhoc-os-command.png)
+
+sudo ansible all 
+
+In /etc/ansible sudo nano test.txt
+
+we'll look to move this to web-node using adhoc command:
+
+- find adhoc command to transfer the file from controller to web node:
+
+try `ansible web -m copy -a "src=/etc/ansible/test.txt dest=/home/vagrant"`
