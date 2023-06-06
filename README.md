@@ -43,7 +43,7 @@
 
 Ansible can also be used with a hybrid approach where ansible controller is hosted locally but our app and db vm's are hosted in the cloud. Diagram to explain how workflow in ansible looks like:
 
-![alt text](./assets/ansible-diagram.png)
+![alt text](./assets/vagrant-diagram.png)
 
 ## Using Ansible (setup instructions)
 
