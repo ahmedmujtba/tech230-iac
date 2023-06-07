@@ -49,6 +49,13 @@ your final output for db should be:
 
 ## Ansible Playbook to copy app folder to web, install NodeJS and start the application
 
+
+NOTE: we can use the following command to copy app folder to our web agent. However for the purpose of the exercise we will be creating a playbook to accomplish this
+
+
+`ansible web -m copy -a "src=/etc/ansible/app dest=/home/vagrant"`
+
+
 1. Creating the playbook:
 
 ```
@@ -57,23 +64,26 @@ sudo nano config_app.yml
 
 2. Adding tasks to the playbook:
 
-`ansible web -m copy -a "src=/etc/ansible/app dest=/home/vagrant"`
+We can add tasks to accomplish following tasks in this playbook:
 
-- using a playbook setup nodejs required version
-- copy required data into web server
-- npm start
-- the app should work on port 3000 (can reverse proxy be setup for this)
+  - Install Nginx
+  - Copy App folder to web
+  - Install NodeJS
+  - Start the Application
+  - Add reverse proxy (yet to be completed)
+
+Code inside the playbook should look like this:
+
+![alt text](./assets/app-config.png)
+
+3. Execute playbook with `sudo ansible-playbook app-config.yml`
 
 ![alt text](./assets/nodejs-playbook.png)
 
-![alt text](./assets/app-playbook.png)
+4. Copy the web IP and paste in the browser with `port 3000` at the end
+
+Working App:
 
 ![alt text](./assets/app-working.png)
 
-```
 
-```
-
-```
-
-```
