@@ -1,5 +1,9 @@
 # tech230-iac
 
+## Definition of IaC
+
+Infrastructure as code (IaC) is the process of managing and provisioning computer data centers through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools
+
 ## How IaC benefits businesses
 
 - Cost:
@@ -30,21 +34,16 @@
 - It's efficient because you don’t need to install any extra software, there’s more room for application resources on your server.
 - Uses SSH protocol for connectivity with servers. i.e. SSH keys
 
-## How Ansible works
-
-- We can use vagrant to create 3 VM's
-- Create ansible controller, deploy node js, mongodb
-- Aim is to control and configure them without having to ssh in each VM. Controller will do the work.
-- Ansible has python dependency (built with python)
-- It uses YAML to exceute playbooks (set of instrcutions to complete tasks)
-
 ## Ansible workflow diagram
 
 Ansible can also be used with a hybrid approach where ansible controller is hosted locally but our app and db vm's are hosted in the cloud. Diagram to explain how workflow in ansible looks like:
 
 - Vagrantfile to provision 3 VM's (Controller, App, DB)
 - VirtualBox creates the VM's
+- Aim is to control and configure them without having to ssh in each VM. Controller will do the work.
 - Setup SSH connections to App and DB in Controller
+- Ansible has python dependency (built with python)
+- It uses YAML to exceute playbooks (set of instrcutions to complete tasks)
 - Connection between App and DB is password protected
 
 ![alt text](./assets/ansible-vagrant-diagram.png)
