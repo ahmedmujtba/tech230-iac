@@ -90,6 +90,78 @@ We can add tasks to accomplish following tasks in this playbook:
 
 Code inside the playbook should look like this:
 
+```
+ GNU nano 2.9.3                    config_app.yml
+
+
+# playbook to install nodejs
+
+---
+
+# setup hosts
+
+- hosts: web
+
+# gather facts
+
+  gather_facts: yes
+
+# provide admin access
+
+  become: true
+# tasks
+  tasks:
+
+  - name: Installing Nginx
+    apt:
+      pkg: nginx
+      state: present
+  - name: Copy app folder to web
+    synchronize:
+      src: /home/vagrant/app
+      dest: /home/vagrant
+
+  - name: NodeJs Repo
+    shell: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    args:
+      warn: no
+
+  - name: Installing Nodejs
+    apt:
+      name: nodejs
+      update_cache : yes
+      state: present
+
+  - name: Installing npm packages
+    command:
+      cmd: npm install
+      chdir: /home/vagrant/app
+    become_user: vagrant
+
+  - name: Nginx reverse proxy
+    replace:
+      path: /etc/nginx/sites-available/default
+      regexp: 'try_files \$uri \$uri/ =404;'
+      replace: 'proxy_pass http://localhost:3000/;'
+
+  - name: Nginx restart
+    systemd:
+      name: nginx
+      state: reloaded
+
+  - name: Kill node process
+    shell: killall node
+    args:
+      chdir: /home/vagrant/app
+      
+  - name: Start Application
+    shell: npm start
+    args:
+      chdir: /home/vagrant/app
+
+
+```
+
 ![alt text](./assets/app-config.png)
 
 3. Execute playbook with `sudo ansible-playbook app-config.yml`
