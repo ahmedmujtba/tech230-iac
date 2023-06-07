@@ -101,3 +101,109 @@ Code inside the playbook should look like this:
 Working App:
 
 ![alt text](./assets/app-working.png)
+
+
+
+
+
+# DB
+
+we want to make sure a ping is still active with status 200
+
+NOTE: If any playbook return error run it with `-vvv` at the end to get readable error
+
+sudo ansible all -m ping
+
+use controller to 
+
+- create a playbook setup mongodb in db-server
+- required version of mongo
+- change mongo.conf to facilitate required connections
+- end goal to cnnect app to db & see the /posts in the browser
+
+TO create a playbook
+```
+cd /etc/ansible
+sudo nano setup_mongo.yml
+```
+
+Code within the playbook:
+
+```
+  GNU nano 2.9.3                   setup_mongo.yml
+
+# to install required version of mongodb in db-server
+
+---
+# hosts name
+
+- hosts: db
+
+# gather facts/logs
+
+  gather_facts: yes
+
+# admin access
+
+  become: true
+
+# add instrcutions
+
+  tasks:
+  - name: Setting up MongoDB
+    apt: pkg=mongodb state=present
+# status check - ensure app is running
+
+
+```
+To run the playbook
+```
+sudo ansible-playbook setup_mongo.yml
+```
+
+output:
+
+![alt text](./assets/setup-mongo-output.png)
+
+
+TO check the status of mongodb
+```
+sudo ansible db -a "sudo systemctl status mongodb"
+```
+
+To SSH into db:
+
+```
+ssh vagrant@192.168.33.11
+```
+
+cd /etc
+
+sudo nano mongod.conf
+
+change following two lines as follows:
+
+bind_ip = 0.0.0.0
+port = 27017
+
+To make sure our conifguration kicks in we re run mongodb
+
+```
+sudo systemctl restart mongodb
+sudo systemctl enable mongodb
+sudo systemctl status mongodb
+```
+
+exit back into controller
+
+ssh into web 
+create a db host =db-ip:27017/posts (only put in bashrc file if it works)
+export DB_HOST=192.168.33.11:27017/posts
+printenv DB_HOST
+.bashrc (only put in bashrc file if it works)
+navigate to app folder
+npm start
+should load all three pages
+
+
+in controller 
