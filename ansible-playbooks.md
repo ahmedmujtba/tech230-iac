@@ -1,6 +1,5 @@
 # Ansible Playbooks
 
-
 ## Ansible Playbook Attributes
 
 - `name`: Description for the task
@@ -11,6 +10,7 @@
 - `shell`: To execute a shell command
 - `args`: To pass additional parameters
 - `chdir`: Change into this directory before running the command
+- `gather_facts`: To gather facts about remote hosts i.e. app,db
 - `synchronize`: wrapper around rsync to make common tasks in playbook quick
 
 NOTE: rsync is a command line tool for copying files and directories between local and remote systems.
@@ -70,9 +70,7 @@ This playbook is created to copy app folder to web, install NodeJS and start the
 
 NOTE: we can use the following command to copy app folder to our web agent. However for the purpose of the exercise we will be creating a playbook to accomplish this
 
-
 `ansible web -m copy -a "src=/etc/ansible/app dest=/home/vagrant"`
-
 
 1. Creating the playbook:
 
@@ -84,11 +82,11 @@ sudo nano config_app.yml
 
 We can add tasks to accomplish following tasks in this playbook:
 
-  - Install Nginx
-  - Copy App folder to web
-  - Install NodeJS
-  - Start the Application
-  - Add reverse proxy (yet to be completed)
+- Install Nginx
+- Copy App folder to web
+- Install NodeJS
+- Start the Application
+- Add reverse proxy (yet to be completed)
 
 Code inside the playbook should look like this:
 
@@ -103,7 +101,3 @@ Code inside the playbook should look like this:
 Working App:
 
 ![alt text](./assets/app-working.png)
-
-
-
-

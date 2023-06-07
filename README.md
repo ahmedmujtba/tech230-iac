@@ -1,9 +1,5 @@
 # tech230-iac
 
-## Ansible Diagram
-
-![alt text](./assets/ansible-vagrant-diagram.png)
-
 ## How IaC benefits businesses
 
 - Cost:
@@ -16,15 +12,22 @@
   - Allows you to automate infrastructure hecne saves time, money and minimizes the risk of human error
   - More focus can be on mission critical tasks
 
-- Scalability & Availability:
 - Consistent Configuration:
   - Standardised conifrguartion and setup for infrastercuture deployment during cloud migration
   - Reduces human error and expediates the migration process
+- Visibility:
+
+  - With IaC, everyone can know the current configuration of the infrastructure. Anyone with permission to access the code can see what the current configuration is.
+
+- Easy to Scale:
+  - With Infrastructure as Code, you can scale your infrastructure easily by just copying the existing code or adding a few extra lines
 
 ## Benefits of Ansible:
 
+- Free as it's open source tool
 - It's simple, human readable automation. no coding skills needed.
 - Ansible is agentless where ansible being the controller acts as master node. no agent node which means it doesn't require any software to be installed on it.
+- It's efficient because you don’t need to install any extra software, there’s more room for application resources on your server.
 - Uses SSH protocol for connectivity with servers. i.e. SSH keys
 
 ## How Ansible works
@@ -33,11 +36,18 @@
 - Create ansible controller, deploy node js, mongodb
 - Aim is to control and configure them without having to ssh in each VM. Controller will do the work.
 - Ansible has python dependency (built with python)
-- It uses YAML
+- It uses YAML to exceute playbooks (set of instrcutions to complete tasks)
 
 ## Ansible workflow diagram
 
 Ansible can also be used with a hybrid approach where ansible controller is hosted locally but our app and db vm's are hosted in the cloud. Diagram to explain how workflow in ansible looks like:
+
+- Vagrantfile to provision 3 VM's (Controller, App, DB)
+- VirtualBox creates the VM's
+- Setup SSH connections to App and DB in Controller
+- Connection between App and DB is password protected
+
+![alt text](./assets/ansible-vagrant-diagram.png)
 
 ## IaC workflow diagram
 
