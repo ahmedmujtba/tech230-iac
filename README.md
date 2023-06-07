@@ -1,8 +1,8 @@
 # tech230-iac
 
-## IaC workflow diagram
+## Ansible Diagram
 
-![alt text](./assets/2.jpg)
+![alt text](./assets/ansible-vagrant-diagram.png)
 
 ## How IaC benefits businesses
 
@@ -16,14 +16,10 @@
   - Allows you to automate infrastructure hecne saves time, money and minimizes the risk of human error
   - More focus can be on mission critical tasks
 
-- ## Scalability & Availability:
+- Scalability & Availability:
 - Consistent Configuration:
   - Standardised conifrguartion and setup for infrastercuture deployment during cloud migration
   - Reduces human error and expediates the migration process
-
-## Why learn IaC & Ansible
-
-## End goal of implementing IaC
 
 ## Benefits of Ansible:
 
@@ -43,8 +39,14 @@
 
 Ansible can also be used with a hybrid approach where ansible controller is hosted locally but our app and db vm's are hosted in the cloud. Diagram to explain how workflow in ansible looks like:
 
-![alt text](./assets/vagrant-diagram.png)
+## IaC workflow diagram
+
+![alt text](./assets/2.jpg)
 
 ## Using Ansible (setup instructions)
 
 Follow the steps in the guide [here](./ansible-setup.md) to setup Ansible and learn how to use it
+
+## Why learn IaC & Ansible
+
+## End goal of implementing IaC

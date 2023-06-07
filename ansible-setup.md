@@ -23,16 +23,19 @@ sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update -y
 sudo apt-get install ansible -y
 ```
+
 15. Check ansible has installed by running `ansible --version`
 16. cd /etc/ansible and run `sudo nano hosts` to store addressed of our web and db hosts, You can do this by adding the following to the file:
 
 For Web:
+
 ```
 [web]
 192.168.33.10 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
 ```
 
 For db:
+
 ```
 [db]
 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
@@ -49,99 +52,35 @@ Output:
 
 ![alt text](./assets/pongs.png)
 
+NOTE: if we dont know operating system we would run yum command to update
 
-if we dont know operating system we would run yum command to update
+18. Adhoc Commands format - `ansible <target_hosts> -m <module_name> -a "<module_arguments>"`
 
-run uname -a gives you info about controller
+Adhoc commands are useful for performiing quick tasks and making small changes. They can be used as an alternative to creating a playbook for smaller tasks.
 
-we need to use adhoc command to find out os of agent node:
+we can use following adhoc command to find out os of agent node:
 
-sudo ansible web -a "uname -a". command checks fro access first but since we have that setup already it will move on to the argument in our command
+```
+sudo ansible web -a "uname -a"
+sudo ansible db -a "uname -a"
+```
+
+Above commands check for access first but since we have that setup already it will move on to the argument in the command
 
 output:
 
 ![alt text](./assets/web-adhoc-os-command.png)
 
-sudo ansible all 
+19. Using adhoc commands to move files to web/db hosts
 
-In /etc/ansible sudo nano test.txt
+In controller, run `cd /etc/ansible` to make sure you're in the right directory and execute `sudo nano test.txt`. we'll look to move this to web-node using adhoc command:
 
-we'll look to move this to web-node using adhoc command:
-
-- find adhoc command to transfer the file from controller to web node:
-
-try `ansible web -m copy -a "src=/etc/ansible/test.txt dest=/home/vagrant"`
+```
+ansible web -m copy -a "src=/etc/ansible/test.txt dest=/home/vagrant"
+```
 
 output:
 
 ![alt text](./assets/file-transfer.png)
 
-codify steps to install/setup (using yaml)
-webserver called nginx in the web node
-
-cd /etc/ansible
-
-sudo nano config_nginx_web.yml to create a playbook to install nginx in web-server or any other servers.
-make sure to add --- to start our yaml file. this is how intepretor knows when our yaml code starts in the file
-
-add the name of the host in the file
-
-(dash below starts a code block)
-- hosts: web
-
-optional things you can do is gather additional facts about the steps
-  gather_facts: yes
-we will also need to add admin access in this file:
-  become: true
-
-add instructions/tasks to install nginx:
-
-tasks:
-- name: Installing Nginx
-  apt: pkg=nginx state=present
-
-
-
-save the file
-run the file `sudo ansible-playbook config_nginx_web.yml`
-
-output:
-
-![alt text](./assets/nginx-config.png)
-
-we can now check nginx status to see if nginx is active and running
-
-sudo ansible web -a "sudo systemctl status nginx"
-
-![alt text](./assets/nginx-status.png)
-
-
-repeat the above steps for `db`
-
-your final output for db should be:
-
-![alt text](./assets/nginx-db-status.png)
-
-tasks to create a playbook to install nodejs:
-
-share app folder to vagrant in controller
-
-from controller to web only use playbook
-
-`ansible web -m copy -a "src=/etc/ansible/app dest=/home/vagrant"`
-
-sudo nano config_app.yml
-
-- using a playbook setup nodejs required version
-- copy required data into web server
-- npm start
-- the app should work on port 3000 (can reverse proxy be setup for this)
-
-
-![alt text](./assets/nodejs-playbook.png)
-
-
-![alt text](./assets/app-playbook.png)
-
-![alt text](./assets/app-working.png)
-
+You can follow this guide [here](./ansible-playbooks.md) to learn how to use create and execute ansible playbooks
