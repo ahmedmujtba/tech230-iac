@@ -1,4 +1,21 @@
-## Ansible Playbooks
+# Ansible Playbooks
+
+
+## Ansible Playbook Attributes
+
+- `name`: Description for the task
+- `become user`: For privilige escalation
+- `apt`: Manages pacakges
+- `update_cache`: Does not update cache, equivalent of apt-get update before the operation
+- `state`: Indicates desired package state
+- `shell`: To execute a shell command
+- `args`: To pass additional parameters
+- `chdir`: Change into this directory before running the command
+- `synchronize`: wrapper around rsync to make common tasks in playbook quick
+
+NOTE: rsync is a command line tool for copying files and directories between local and remote systems.
+
+## Nginx Playbook
 
 We can create Ansible Playbooks to codify steps to install/setup (using yaml) webserver called nginx in the web node.
 
@@ -47,8 +64,9 @@ your final output for db should be:
 
 ![alt text](./assets/nginx-db-status.png)
 
-## Ansible Playbook to copy app folder to web, install NodeJS and start the application
+## NodeJS Playbook
 
+This playbook is created to copy app folder to web, install NodeJS and start the application.
 
 NOTE: we can use the following command to copy app folder to our web agent. However for the purpose of the exercise we will be creating a playbook to accomplish this
 
@@ -85,5 +103,7 @@ Code inside the playbook should look like this:
 Working App:
 
 ![alt text](./assets/app-working.png)
+
+
 
 
