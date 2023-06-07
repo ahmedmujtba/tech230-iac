@@ -153,7 +153,7 @@ Code inside the playbook should look like this:
     shell: killall node
     args:
       chdir: /home/vagrant/app
-      
+
   - name: Start Application
     shell: npm start
     args:
@@ -178,22 +178,23 @@ Working App:
 
 
 
-# DB
+## DB Playbook
 
-we want to make sure a ping is still active with status 200
+We want to make sure ping is still active with status 200, in order to check this for web and db, run:
 
-NOTE: If any playbook return error run it with `-vvv` at the end to get readable error
-
+```
 sudo ansible all -m ping
+```
 
-use controller to 
+Now we will create a playbook to accomplish the following: 
 
-- create a playbook setup mongodb in db-server
-- required version of mongo
+- setup mongodb in db-server
 - change mongo.conf to facilitate required connections
 - end goal to cnnect app to db & see the /posts in the browser
 
-TO create a playbook
+NOTE: If any playbook return error run it with `-vvv` at the end to get readable error.
+
+1. To create a playbook
 ```
 cd /etc/ansible
 sudo nano setup_mongo.yml
@@ -227,8 +228,29 @@ Code within the playbook:
 # status check - ensure app is running
 
 
+# change bindip
+  - name: Changing bindip
+    replace:
+      path: /etc/mongodb.conf
+      regexp: 'bind_ip = 127.0.0.1'
+      replace: 'bind_ip = 0.0.0.0'
+
+  - name: Uncomment port
+    replace:
+      path: /etc/mongodb.conf
+      regexp: '# port = 27017'
+      replace: 'port = 27017'
+
+# Restart mongodb
+  - name: MongoDB restart
+    systemd:
+      name: mongodb
+
+
 ```
-To run the playbook
+
+2. To run the playbook:
+
 ```
 sudo ansible-playbook setup_mongo.yml
 ```
@@ -238,27 +260,27 @@ output:
 ![alt text](./assets/setup-mongo-output.png)
 
 
-TO check the status of mongodb
+3. To check the status of mongodb
+
 ```
 sudo ansible db -a "sudo systemctl status mongodb"
 ```
 
-To SSH into db:
+4. To manually change the bindip:
 
+SSH into db:
 ```
 ssh vagrant@192.168.33.11
-```
-
 cd /etc
-
 sudo nano mongod.conf
+```
 
 change following two lines as follows:
 
 bind_ip = 0.0.0.0
 port = 27017
 
-To make sure our conifguration kicks in we re run mongodb
+5. To make sure our conifguration kicks in we re run mongodb
 
 ```
 sudo systemctl restart mongodb
@@ -266,16 +288,13 @@ sudo systemctl enable mongodb
 sudo systemctl status mongodb
 ```
 
-exit back into controller
-
-ssh into web 
-create a db host =db-ip:27017/posts (only put in bashrc file if it works)
+6. Exit back into controller, `ssh into web` and create a db host following below steps:
+```
 export DB_HOST=192.168.33.11:27017/posts
 printenv DB_HOST
-.bashrc (only put in bashrc file if it works)
-navigate to app folder
+.bashrc
+cd /home/vagrant/app
 npm start
-should load all three pages
+```
 
-
-in controller 
+![alt text](./assets/web-db-postspage-working.png)
